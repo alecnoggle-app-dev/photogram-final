@@ -15,9 +15,9 @@ class UserAuthenticationController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
+    the_user_name = params.fetch("user_name")
 
-    matching_users = User.where({ :id => the_id })
+    matching_users = User.where({ :username => the_user_name })
 
     @the_user = matching_users.at(0)
 
@@ -69,8 +69,8 @@ class UserAuthenticationController < ApplicationController
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.private = params.fetch("query_private", false)
     @user.username = params.fetch("query_username")
-    @user.comments_count = params.fetch("query_comments_count")
-    @user.likes_count = params.fetch("query_likes_count")
+    @user.comments_count = 0
+    @user.likes_count = 0
 
     save_status = @user.save
 

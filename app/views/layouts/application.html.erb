@@ -15,20 +15,38 @@
   </head>
 
   <body>
-    <ul>
-      <li>
-        <a href="/users">All users</a>
-      </li>
-      <li>
-        <a href="/photos">All public photos</a>
-      </li>
-      <li>
-        <a href="/user_sign_in">Sign in</a>
-      </li>
-      <li>
-        <a href="/user_sign_up">Sign up</a>
-      </li>
-    </ul>
+    <% if session.fetch(:user_id) == nil %>
+      <ul>
+        <li>
+          <a href="/users">All users</a>
+        </li>
+        <li>
+          <a href="/photos">All public photos</a>
+        </li>
+        <li>
+          <a href="/user_sign_in">Sign in</a>
+        </li>
+        <li>
+          <a href="/user_sign_up">Sign up</a>
+        </li>
+      </ul>
+    <% else %>
+      <ul>
+        <li>
+          <a href="/users">All users</a>
+        </li>
+        <li>
+          <a href="/photos">All public photos</a>
+        </li>
+        <% the_user = User.where({ :id => session.fetch(:user_id) }).at(0) %>
+        <li>
+          <a href="/users/<%= the_user.username %>"><%= the_user.username %></a>
+        </li>
+        <li>
+          <a href="/user_sign_out">Sign out</a>
+        </li>
+      </ul>
+    <% end %>
 
     <p style="color: LightGreen"><%= notice %></p>
     <p style="color: LightPink"><%= alert %></p>
