@@ -21,7 +21,13 @@ class FollowRequestsController < ApplicationController
     the_follow_request = FollowRequest.new
     the_follow_request.recipient_id = params.fetch("query_recipient_id")
     the_follow_request.sender_id = session.fetch(:user_id)
-    the_follow_request.status = params.fetch("query_status")
+    privacy_setting = params.fetch("query_status")
+    if privacy_setting == "Yes"
+      query_status = "pending"
+    else
+      query_status = "accepted"
+    end
+    the_follow_request.status = query_status
 
     if the_follow_request.valid?
       the_follow_request.save

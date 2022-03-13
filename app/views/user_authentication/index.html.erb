@@ -27,6 +27,7 @@
               <% if session.fetch(:user_id) != nil %>
                 <form action="/insert_follow_request" method="post">
                   <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
+                  <input type="hidden" name="query_status" value="<%= a_user.private_user %>">
 
                   <button>
                     Follow
