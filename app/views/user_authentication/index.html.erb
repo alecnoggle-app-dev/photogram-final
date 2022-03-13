@@ -26,7 +26,7 @@
             <td>
               <% if session.fetch(:user_id) != nil %>
                 <form action="/insert_follow_request" method="post">
-                  <input type="hidden" name="<%= a_user.username %>">
+                  <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
 
                   <button>
                     Follow
