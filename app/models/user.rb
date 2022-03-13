@@ -25,4 +25,12 @@ class User < ApplicationRecord
 
   has_many(:likedphotos, { :through => :likes, :source => :photo })
   has_many(:commentedphotos, { :through => :comments, :source => :photo })
+
+  def private_user
+    if self.private? == true
+      return "Yes"
+    else
+      return "No"
+    end
+  end
 end
