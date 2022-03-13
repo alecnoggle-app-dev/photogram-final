@@ -15,6 +15,16 @@ class UserAuthenticationController < ApplicationController
   end
 
   def show
+    the_id = params.fetch("path_id")
+
+    matching_users = User.where({ :id => the_id })
+
+    @the_user = matching_users.at(0)
+
+    @matching_photos = @the_user.photos.all
+
+    @list_of_user_photos = @matching_photos.order({ :created_at => :desc })
+    
     render({ :template => "user_authentication/show.html.erb"})
   end
   

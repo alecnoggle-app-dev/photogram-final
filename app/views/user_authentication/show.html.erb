@@ -1,14 +1,14 @@
-<h1>Name</h1>
+<h1><%= @the_user.username %></h1>
 
 <dl>
   <dt>Private</dt>
-    <dd>T or F</dd>
+    <dd><%= @the_user.private? %></dd>
   <dt>Followers</dt>
     <dd># of followers</dd>
     <dd>
       <div>
         <form action="/insert_follow_request" method="post">
-          <input type="hidden" name="query_recipient_id" value="95">
+          <input type="hidden" name="query_recipient_id" value="session">
           <button>Follow</button>
         </form>
       </div>
@@ -20,21 +20,21 @@
 <nav>
   <ul>
     <li>
-      <a href="/users/NAME">Profile</a>
+      <a href="/users/<%= @the_user.username %>">Profile</a>
     </li>
     <li>
-      <a href="/users/NAME/liked_photos">Liked photos</a>
+      <a href="/users/<%= @the_user.username %>/liked_photos">Liked photos</a>
     </li>
     <li>
-      <a href="/users/NAME/feed">Feed</a>
+      <a href="/users/<%= @the_user.username %>/feed">Feed</a>
     </li>
     <li>
-      <a href="/users/NAME/discover">Discover</a>
+      <a href="/users/<%= @the_user.username %>/discover">Discover</a>
     </li>
   </ul>
 </nav>
 
-<h2>Own photos (#)</h2>
+<h2>Own photos (<%= @the_user.photos.count %>)</h2>
 
 <table border="1">
   <tr>
@@ -61,30 +61,31 @@
     <th>
     </th>
   </tr>
+  <% @list_of_user_photos.each do |a_photo| %>
+    <tr>
+      <td>
+        <img src="<%= a_photo.image %>">
+      </td>
 
-  <tr>
-    <td>
-      Image
-    </td>
+      <td>
+        <%= @the_user.username %>
+      </td>
 
-    <td>
-      Owner
-    </td>
+      <td>
+        <%= a_photo.caption %>
+      </td>
 
-    <td>
-      Caption
-    </td>
+      <td>
+        <%= time_ago_in_words(a_photo.created_at) %>
+      </td>
 
-    <td>
-      Posted
-    </td>
+      <td>
+        <%= a_photo.likes_count %>
+      </td>
 
-    <td>
-      Likes
-    </td>
-
-    <td>
-      <a href="/photos/<%# a_photo.id %>">Show details</a>
-    </td>
-  </tr>
+      <td>
+        <a href="/photos/<%= a_photo.id %>">Show details</a>
+      </td>
+    </tr>
+  <% end %>
 </table>
