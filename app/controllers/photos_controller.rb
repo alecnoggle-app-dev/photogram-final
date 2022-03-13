@@ -14,6 +14,10 @@ class PhotosController < ApplicationController
 
     @the_photo = matching_photos.at(0)
 
+    matching_comments = @the_photo.comments.all
+
+    @list_of_photo_comments = matching_comments.order({ :created_at => :desc })
+
     render({ :template => "photos/show.html.erb" })
   end
 
