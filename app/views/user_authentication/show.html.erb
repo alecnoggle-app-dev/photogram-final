@@ -4,17 +4,23 @@
   <dt>Private</dt>
     <dd><%= @the_user.private? %></dd>
   <dt>Followers</dt>
-    <dd># of followers</dd>
+    <dd><%= @the_user.receivedfollowrequests.where({ :status => "accepted" }).count %></dd>
     <dd>
       <div>
-        <form action="/insert_follow_request" method="post">
-          <input type="hidden" name="query_recipient_id" value="session">
-          <button>Follow</button>
-        </form>
+        <% if session.fetch(:user_id) != nil %>
+          <form action="/insert_follow_request" method="post">
+            <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">
+            <input type="hidden" name="query_status" value="<%= @the_user.private_user %>">
+
+            <button>
+              Follow
+            </button>
+          </form>
+        <% end %> 
       </div>
     </dd>
   <dt>Following</dt>
-  <dd># of following</dd>
+    <dd><%= @the_user.sentfollowrequests.where({ :status => "accepted" }).count %></dd>
 </dl>
 
 <nav>
