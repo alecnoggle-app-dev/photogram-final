@@ -33,6 +33,8 @@ class UserAuthenticationController < ApplicationController
     matching_users = User.where({ :username => the_user_name })
     @the_user = matching_users.at(0)
 
+    @following_relations = @the_user.sentfollowrequests.where({ :status => "accepted" })
+
     #array_of_following = @the_user.sentfollowrequests.where({ :status => "accepted"})
     #array_of_following_id = array_of_following.where 
     #followed_ids = follows.where.not({ :recipient_id => nil })

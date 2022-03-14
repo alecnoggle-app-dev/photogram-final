@@ -46,6 +46,17 @@
 
 <h3>Add a new comment</h3>
 
+<div>
+<form action="/insert_comment" method="post">
+  <label for="comment_box">Comment</label>
+    <input type="text" id="comment_box" name="query_body">
+    <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+  <button>
+    Add comment
+  </button>
+</form>
+</div>
+
     <div>
       <div>
         <a href="/photos">
