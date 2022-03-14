@@ -21,6 +21,13 @@
     </dd>
   <dt>Following</dt>
     <dd><%= @the_user.sentfollowrequests.where({ :status => "accepted" }).count %></dd>
+  <%# if session.fetch( :user_id ) == @the_user.id %>
+    <dt>
+      <dd>
+        Username private box
+      </dd>
+    </dt>
+  <%end%>
 </dl>
 
 <nav>
