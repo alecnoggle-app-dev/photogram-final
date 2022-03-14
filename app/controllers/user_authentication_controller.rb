@@ -30,10 +30,14 @@ class UserAuthenticationController < ApplicationController
 
   def feed
     the_user_name = params.fetch("user_name")
-
     matching_users = User.where({ :username => the_user_name })
-
     @the_user = matching_users.at(0)
+
+    #array_of_following = @the_user.sentfollowrequests.where({ :status => "accepted"})
+    #array_of_following_id = array_of_following.where 
+    #followed_ids = follows.where.not({ :recipient_id => nil })
+    #matching_photos = Photo.where({ :owner_id => followed_id })
+    #@list_of_photos = matching_photos.order({ :order => :desc })
 
     render({ :template => "user_authentication/feed.html.erb"})
   end
