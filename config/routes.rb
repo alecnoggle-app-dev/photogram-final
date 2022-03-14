@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get("/", { :controller => "user_authentication", :action => "homepage"})
   get("/users", { :controller => "user_authentication", :action => "index"})
   get("/users/:user_name", { :controller => "user_authentication", :action => "show"})
+  get("/users/:user_name/feed", { :controller => "user_authentication", :action => "feed"})
 
   #------------------------------
   # Routes for the Follow request resource:
